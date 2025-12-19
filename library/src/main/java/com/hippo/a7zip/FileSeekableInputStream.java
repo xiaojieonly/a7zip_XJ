@@ -16,7 +16,7 @@
 
 package com.hippo.a7zip;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

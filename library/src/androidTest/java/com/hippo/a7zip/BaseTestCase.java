@@ -16,7 +16,7 @@
 
 package com.hippo.a7zip;
 
-import android.support.test.InstrumentationRegistry;
+import androidx.test.platform.app.InstrumentationRegistry;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class BaseTestCase {
     InputStream is = null;
     OutputStream os = null;
     try {
-      is = InstrumentationRegistry.getContext().getAssets().open(path);
+      is = InstrumentationRegistry.getInstrumentation().getContext().getAssets().open(path);
       os = new FileOutputStream(of);
       IOUtils.copy(is, os);
     } finally {

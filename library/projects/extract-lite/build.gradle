@@ -17,20 +17,25 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    namespace "com.hippo.a7zip.extract.lite"
+    compileSdkVersion 36
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 28
+        minSdkVersion 21
+        targetSdkVersion 36
         versionCode 1
         versionName '1.0'
+        ndk {
+            // Support 16KB page size devices
+            pageSize = "16384"
+        }
         externalNativeBuild {
             cmake {
                 targets 'a7zip'
                 arguments '-DANDROID_CPP_FEATURES=exceptions', '-DEXTRACT=ON', '-DLITE=ON'
             }
         }
-        testInstrumentationRunner 'com.hippo.a7zip.A7ZipAndroidJUnitRunner'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     sourceSets {
@@ -54,11 +59,11 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:support-annotations:28.0.0'
-    implementation 'com.getkeepsafe.relinker:relinker:1.4.0'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    implementation 'androidx.annotation:annotation:1.9.1'
+    implementation 'com.getkeepsafe.relinker:relinker:1.4.5'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
     androidTestImplementation 'com.github.seven332.okio:okio:1.16.0'
-    androidTestImplementation 'commons-io:commons-io:2.5'
+    androidTestImplementation 'commons-io:commons-io:2.21.0'
 }
 
 apply from: rootProject.file('android-maven-gradle.gradle')

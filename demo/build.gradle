@@ -1,14 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    namespace "com.hippo.a7zip.demo"
+    compileSdkVersion 36
 
     defaultConfig {
         applicationId "com.hippo.a7zip.demo"
-        minSdkVersion 14
-        targetSdkVersion 28
+        minSdkVersion 21
+        targetSdkVersion 36
         versionCode 1
         versionName "1.0"
+        ndk {
+            // Support 16KB page size devices
+            pageSize = "16384"
+        }
     }
 
     buildTypes {
@@ -21,6 +26,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }

@@ -14,36 +14,85 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.android.library' // Make sure this is applied in the module's build.gradle
+apply plugin: 'maven-publish'
+
+// This block is the main addition/change.
+// It tells AGP to prepare the 'release' variant for publishing.
+android {
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+}
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-tasks.withType(Javadoc) {
-    options.encoding = 'UTF-8'
-    failOnError false
-}
+// The 'javadoc' and 'sourcesJar' tasks might no longer be necessary
+// if withJavadocJar() and withSourcesJar() work correctly, but we'll keep them for now
+// as your original file had them.
 
 // build a jar with source files
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
+    archiveClassifier = 'sources'
 }
 
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.sourceFiles
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    classpath += configurations.compile
+    // Use implementation configuration instead of deprecated compile
+    classpath += configurations.implementation
+    options.encoding = 'UTF-8'
+    failOnError false
 }
 
 // build a jar with javadoc
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
     from javadoc.destinationDir
 }
 
-artifacts {
-    archives sourcesJar
-    archives javadocJar
+afterEvaluate {
+    publishing {
+        publications {
+            // The publication name can be anything, but 'release' is conventional.
+            release(MavenPublication) {
+                // Set groupId, artifactId, version
+                groupId = project.group ?: 'com.hippo.a7zip'
+                artifactId = project.name
+                version = project.version ?: android.defaultConfig.versionName
+
+                // This now correctly finds the 'release' component created by the 'android.publishing' block.
+                from components.release
+
+                // The withSourcesJar() and withJavadocJar() might make these redundant.
+                // If you still get errors, you can try removing the next two lines.
+                artifact sourcesJar
+                artifact javadocJar
+
+                // Configure POM
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+
+                    // Add implementation dependencies
+                    configurations.implementation.allDependencies.each { dependency ->
+                        if (dependency.group != null && dependency.name != null && dependency.version != null) {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', dependency.group)
+                            dependencyNode.appendNode('artifactId', dependency.name)
+                            dependencyNode.appendNode('version', dependency.version)
+
+                            // Mark as compile scope (default for implementation)
+                            dependencyNode.appendNode('scope', 'compile')
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

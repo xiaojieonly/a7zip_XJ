@@ -16,7 +16,7 @@
 
 package com.hippo.a7zip;
 
-import android.support.test.runner.AndroidJUnitRunner;
+import androidx.test.runner.AndroidJUnitRunner;
 
 public class A7ZipAndroidJUnitRunner extends AndroidJUnitRunner {
 
