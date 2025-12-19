@@ -25,10 +25,6 @@ android {
         targetSdkVersion 36
         versionCode 1
         versionName '1.0'
-        ndk {
-            // Support 16KB page size devices
-            pageSize = "16384"
-        }
         externalNativeBuild {
             cmake {
                 targets 'a7zip'
@@ -61,7 +57,7 @@ android {
 dependencies {
     implementation 'androidx.annotation:annotation:1.9.1'
     implementation 'com.getkeepsafe.relinker:relinker:1.4.5'
-    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test:runner:1.7.0'
     androidTestImplementation 'com.github.seven332.okio:okio:1.16.0'
     androidTestImplementation 'commons-io:commons-io:2.21.0'
 }

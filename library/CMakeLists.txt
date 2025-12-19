@@ -42,6 +42,8 @@ add_library(a7zip SHARED ${A_SEVEN_ZIP_SOURCES})
 target_link_libraries(a7zip PUBLIC p7zip log)
 set_target_properties(a7zip PROPERTIES OUTPUT_NAME ${A_SEVEN_ZIP_NAME})
 target_compile_options(a7zip PRIVATE ${A_SEVEN_ZIP_FLAGS})
+# Support 16KB page size devices
+target_link_options(a7zip PRIVATE "-Wl,-z,max-page-size=16384" "-Wl,-z,common-page-size=16384")
 
 add_library(gtest STATIC IMPORTED)
 set_target_properties(gtest PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/googletest/lib/${ANDROID_ABI}/libgtest.a)
@@ -52,3 +54,5 @@ target_include_directories(a7zip-test PRIVATE
         src/main/cpp
         googletest/include
 )
+# Support 16KB page size devices
+target_link_options(a7zip-test PRIVATE "-Wl,-z,max-page-size=16384" "-Wl,-z,common-page-size=16384")

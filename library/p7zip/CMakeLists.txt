@@ -255,3 +255,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${P_SEVEN_ZIP_FLAGS}")
 add_library(p7zip SHARED ${P_SEVEN_ZIP_SOURCES})
 target_include_directories(p7zip PUBLIC ${P_SEVEN_ZIP_INCLUDES})
 set_target_properties(p7zip PROPERTIES OUTPUT_NAME ${P_SEVEN_ZIP_NAME})
+
+# Support 16KB page size devices
+target_link_options(p7zip PRIVATE "-Wl,-z,max-page-size=16384" "-Wl,-z,common-page-size=16384")
