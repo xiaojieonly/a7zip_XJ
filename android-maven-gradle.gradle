@@ -45,10 +45,18 @@ task sourcesJar(type: Jar) {
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.sourceFiles
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    // Use implementation configuration instead of deprecated compile
-    classpath += configurations.implementation
     options.encoding = 'UTF-8'
     failOnError false
+}
+
+// Configure javadoc classpath in afterEvaluate to use resolvable configurations
+afterEvaluate {
+    // Use releaseRuntimeClasspath which extends implementation and is resolvable
+    def runtimeClasspath = configurations.findByName('releaseRuntimeClasspath') 
+        ?: configurations.findByName('runtimeClasspath')
+    if (runtimeClasspath != null) {
+        javadoc.classpath += runtimeClasspath
+    }
 }
 
 // build a jar with javadoc
