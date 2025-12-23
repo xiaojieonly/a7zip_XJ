@@ -31,6 +31,18 @@ allprojects {
         maven { url 'https://jitpack.io' }
     }
     
+    // 解决 Kotlin 依赖冲突：排除旧版本的 kotlin-stdlib-jdk7 和 kotlin-stdlib-jdk8
+    // 因为 Kotlin 1.8+ 的 kotlin-stdlib 已经包含了这些内容
+    configurations.configureEach {
+        resolutionStrategy {
+            // 强制使用统一的 Kotlin 标准库版本
+            force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.22'
+            // 排除旧版本的 jdk7 和 jdk8 扩展库，它们的内容已包含在 kotlin-stdlib 1.8+ 中
+            exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
+            exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+        }
+    }
+    
     // Configure Java toolchain for all projects
     afterEvaluate { project ->
         if (project.hasProperty('android')) {
