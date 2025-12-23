@@ -24,6 +24,8 @@ set(P_SEVEN_ZIP_EXTRACT_LITE_SOURCES
         p7zip/CPP/7zip/Archive/Zip/ZipRegister.cpp
         # Zip output archive implementation (COutArchive, referenced by ZipUpdate.cpp 等)
         p7zip/CPP/7zip/Archive/Zip/ZipOut.cpp
+        # Zip add/update common code (CAddCommon used by ZipUpdate.cpp)
+        p7zip/CPP/7zip/Archive/Zip/ZipAddCommon.cpp
         p7zip/CPP/7zip/Archive/ArchiveExports.cpp
         p7zip/CPP/7zip/Archive/DllExports2.cpp
         p7zip/CPP/7zip/Archive/HandlerCont.cpp
@@ -38,6 +40,8 @@ set(P_SEVEN_ZIP_EXTRACT_LITE_SOURCES
         p7zip/CPP/7zip/Common/ProgressUtils.cpp
         p7zip/CPP/7zip/Common/PropId.cpp
         p7zip/CPP/7zip/Common/StreamObjects.cpp
+        # Offset-out stream used by ZipOut.cpp (COffsetOutStream)
+        p7zip/CPP/7zip/Common/OffsetStream.cpp
         p7zip/CPP/7zip/Common/StreamUtils.cpp
         p7zip/CPP/7zip/Compress/Bcj2Coder.cpp
         p7zip/CPP/7zip/Compress/Bcj2Register.cpp
