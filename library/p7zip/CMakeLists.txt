@@ -22,6 +22,8 @@ set(P_SEVEN_ZIP_EXTRACT_LITE_SOURCES
         p7zip/CPP/7zip/Archive/Zip/ZipIn.cpp
         p7zip/CPP/7zip/Archive/Zip/ZipItem.cpp
         p7zip/CPP/7zip/Archive/Zip/ZipRegister.cpp
+        # Zip output archive implementation (COutArchive, referenced by ZipUpdate.cpp 等)
+        p7zip/CPP/7zip/Archive/Zip/ZipOut.cpp
         p7zip/CPP/7zip/Archive/ArchiveExports.cpp
         p7zip/CPP/7zip/Archive/DllExports2.cpp
         p7zip/CPP/7zip/Archive/HandlerCont.cpp
@@ -118,6 +120,8 @@ set(P_SEVEN_ZIP_EXTRACT_LITE_SOURCES
         p7zip/C/Delta.c
         p7zip/C/Lzma2Dec.c
         p7zip/C/LzmaDec.c
+        # MatchFinder / LZ hash implementation (used by DeflateEncoder, LzmaEnc 等)
+        p7zip/C/LzFind.c
         # LZMA / LZMA2 encoder side (used by LzmaEncoder.cpp 等)
         p7zip/C/LzmaEnc.c
         p7zip/C/Lzma2Enc.c
