@@ -193,8 +193,18 @@ set(P_SEVEN_ZIP_EXTRACT_SOURCES
         p7zip/CPP/7zip/Archive/VmdkHandler.cpp
         p7zip/CPP/7zip/Archive/XarHandler.cpp
         p7zip/CPP/7zip/Archive/ZHandler.cpp
+        # single-method output helpers (used by Gz/Bz2/Swf handlers)
+        p7zip/CPP/7zip/Archive/Common/HandlerOut.cpp
+        # Zip/Wim output handlers (UpdateItems / GetFileTimeType / SetProperties)
+        p7zip/CPP/7zip/Archive/Zip/ZipHandlerOut.cpp
+        p7zip/CPP/7zip/Archive/Wim/WimHandlerOut.cpp
+        # encoder side for gzip / zlib / bzip2 / LZMA / Deflate etc.
+        p7zip/CPP/7zip/Compress/BZip2Encoder.cpp
         p7zip/CPP/7zip/Compress/BZip2Decoder.cpp
         p7zip/CPP/7zip/Compress/BZip2Register.cpp
+        p7zip/CPP/7zip/Compress/DeflateEncoder.cpp
+        p7zip/CPP/7zip/Compress/LzmaEncoder.cpp
+        p7zip/CPP/7zip/Compress/ZlibEncoder.cpp
         p7zip/CPP/7zip/Compress/LzhDecoder.cpp
         p7zip/CPP/7zip/Compress/LzmsDecoder.cpp
         p7zip/CPP/7zip/Compress/LzxDecoder.cpp
