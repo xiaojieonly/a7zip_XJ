@@ -26,6 +26,8 @@ set(P_SEVEN_ZIP_EXTRACT_LITE_SOURCES
         p7zip/CPP/7zip/Archive/Zip/ZipOut.cpp
         # Zip add/update common code (CAddCommon used by ZipUpdate.cpp)
         p7zip/CPP/7zip/Archive/Zip/ZipAddCommon.cpp
+        # Zip handler update methods (UpdateItems / GetFileTimeType / SetProperties)
+        p7zip/CPP/7zip/Archive/Zip/ZipHandlerOut.cpp
         p7zip/CPP/7zip/Archive/ArchiveExports.cpp
         p7zip/CPP/7zip/Archive/DllExports2.cpp
         p7zip/CPP/7zip/Archive/HandlerCont.cpp
@@ -42,6 +44,8 @@ set(P_SEVEN_ZIP_EXTRACT_LITE_SOURCES
         p7zip/CPP/7zip/Common/StreamObjects.cpp
         # Offset-out stream used by ZipOut.cpp (COffsetOutStream)
         p7zip/CPP/7zip/Common/OffsetStream.cpp
+        # Common method-property helpers (CProps::SetCoderProps 等)
+        p7zip/CPP/7zip/Common/MethodProps.cpp
         p7zip/CPP/7zip/Common/StreamUtils.cpp
         p7zip/CPP/7zip/Compress/Bcj2Coder.cpp
         p7zip/CPP/7zip/Compress/Bcj2Register.cpp
@@ -67,6 +71,8 @@ set(P_SEVEN_ZIP_EXTRACT_LITE_SOURCES
         p7zip/CPP/7zip/Compress/Lzma2Register.cpp
         p7zip/CPP/7zip/Compress/LzmaDecoder.cpp
         p7zip/CPP/7zip/Compress/LzmaRegister.cpp
+        # LZMA encoder implementation (NCompress::NLzma::CEncoder)
+        p7zip/CPP/7zip/Compress/LzmaEncoder.cpp
         p7zip/CPP/7zip/Compress/LzOutWindow.cpp
         p7zip/CPP/7zip/Compress/PpmdDecoder.cpp
         p7zip/CPP/7zip/Compress/PpmdRegister.cpp
