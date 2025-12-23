@@ -202,6 +202,12 @@ set(P_SEVEN_ZIP_EXTRACT_SOURCES
         p7zip/CPP/7zip/Compress/XpressDecoder.cpp
         p7zip/CPP/7zip/Compress/ZDecoder.cpp
         p7zip/CPP/7zip/Compress/ZlibDecoder.cpp
+        # Common method-property helpers (ParsePropToUInt32, etc.)
+        p7zip/CPP/7zip/Common/MethodProps.cpp
+        # TAR update (out) support for GetFileTimeType / UpdateItems and helpers
+        p7zip/CPP/7zip/Archive/Tar/TarHandlerOut.cpp
+        p7zip/CPP/7zip/Archive/Tar/TarUpdate.cpp
+        p7zip/CPP/7zip/Archive/Tar/TarOut.cpp
         p7zip/CPP/Common/MyMap.cpp
         p7zip/CPP/Common/MyXml.cpp
         p7zip/C/HuffEnc.c
