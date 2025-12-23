@@ -118,10 +118,15 @@ set(P_SEVEN_ZIP_EXTRACT_LITE_SOURCES
         p7zip/C/Delta.c
         p7zip/C/Lzma2Dec.c
         p7zip/C/LzmaDec.c
+        # LZMA / LZMA2 encoder side (used by LzmaEncoder.cpp 等)
+        p7zip/C/LzmaEnc.c
+        p7zip/C/Lzma2Enc.c
         p7zip/C/Ppmd7.c
         p7zip/C/Ppmd7Dec.c
         p7zip/C/Ppmd8.c
+        # PPMd8 range encoder side (used by PpmdZip.cpp)
         p7zip/C/Ppmd8Dec.c
+        p7zip/C/Ppmd8Enc.c
         p7zip/C/Sha1.c
         p7zip/C/Sha256.c
         p7zip/C/Xz.c
@@ -212,6 +217,12 @@ set(P_SEVEN_ZIP_EXTRACT_SOURCES
         p7zip/CPP/7zip/Compress/XpressDecoder.cpp
         p7zip/CPP/7zip/Compress/ZDecoder.cpp
         p7zip/CPP/7zip/Compress/ZlibDecoder.cpp
+        # Zip archive update helpers (NArchive::NZip::Update)
+        p7zip/CPP/7zip/Archive/Zip/ZipUpdate.cpp
+        # UniqBlocks support (used by WimHandlerOut.cpp, 7z out, etc.)
+        p7zip/CPP/7zip/Common/UniqBlocks.cpp
+        # BWT block sort implementation used by BZip2Encoder
+        p7zip/C/BwtSort.c
         # Common method-property helpers (ParsePropToUInt32, etc.)
         p7zip/CPP/7zip/Common/MethodProps.cpp
         # TAR update (out) support for GetFileTimeType / UpdateItems and helpers

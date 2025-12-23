@@ -65,4 +65,4 @@ Variant | groupId:artifactId | Note
 ---|---|---
 extract-lite | com.github.seven332.a7zip:extract-lite | Open 7z, Rar, Rar5, Zip
 extract | com.github.seven332.a7zip:extract | Open all formats 7-Zip supported
-  
+   
