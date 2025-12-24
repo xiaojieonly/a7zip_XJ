@@ -80,12 +80,9 @@ afterEvaluate {
                 version = project.version ?: android.defaultConfig.versionName
 
                 // This now correctly finds the 'release' component created by the 'android.publishing' block.
+                // The withSourcesJar() and withJavadocJar() in the android.publishing block
+                // automatically include sources and javadoc, so we don't need to add them manually.
                 from components.release
-
-                // The withSourcesJar() and withJavadocJar() might make these redundant.
-                // If you still get errors, you can try removing the next two lines.
-                artifact sourcesJar
-                artifact javadocJar
 
                 // Configure POM dependencies
                 // AGP's from components.release should handle dependencies automatically,
