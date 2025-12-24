@@ -87,20 +87,46 @@ afterEvaluate {
                 artifact sourcesJar
                 artifact javadocJar
 
-                // Configure POM
+                // Configure POM dependencies
+                // AGP's from components.release should handle dependencies automatically,
+                // but we ensure external dependencies are properly included
                 pom.withXml {
-                    def dependenciesNode = asNode().appendNode('dependencies')
-
-                    // Add implementation dependencies
+                    def root = asNode()
+                    def dependenciesNode = root.dependencies
+                    
+                    // Get or create dependencies node
+                    if (dependenciesNode == null || dependenciesNode.size() == 0) {
+                        dependenciesNode = root.appendNode('dependencies')
+                    } else {
+                        dependenciesNode = dependenciesNode[0]
+                    }
+                    
+                    // Collect existing dependency keys to avoid duplicates
+                    def existingDeps = []
+                    dependenciesNode.dependency.each { dep ->
+                        def groupId = dep.groupId?.text()
+                        def artifactId = dep.artifactId?.text()
+                        if (groupId && artifactId) {
+                            existingDeps.add("${groupId}:${artifactId}")
+                        }
+                    }
+                    
+                    // Add implementation dependencies that are not Android SDK
                     configurations.implementation.allDependencies.each { dependency ->
-                        if (dependency.group != null && dependency.name != null && dependency.version != null) {
-                            def dependencyNode = dependenciesNode.appendNode('dependency')
-                            dependencyNode.appendNode('groupId', dependency.group)
-                            dependencyNode.appendNode('artifactId', dependency.name)
-                            dependencyNode.appendNode('version', dependency.version)
-
-                            // Mark as compile scope (default for implementation)
-                            dependencyNode.appendNode('scope', 'compile')
+                        if (dependency.group != null && 
+                            dependency.name != null && 
+                            dependency.version != null &&
+                            !dependency.group.startsWith('com.android')) {
+                            
+                            def depKey = "${dependency.group}:${dependency.name}"
+                            if (!existingDeps.contains(depKey)) {
+                                def depNode = dependenciesNode.appendNode('dependency')
+                                depNode.appendNode('groupId', dependency.group)
+                                depNode.appendNode('artifactId', dependency.name)
+                                depNode.appendNode('version', dependency.version)
+                                depNode.appendNode('scope', 'compile')
+                                existingDeps.add(depKey)
+                            }
                         }
                     }
                 }
