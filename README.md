@@ -21,8 +21,8 @@ allprojects {
 
 ```gradle
 dependencies {
-    implementation "com.github.seven332.a7zip:extract:${version}"
-    // implementation "com.github.seven332.a7zip:extract-lite:${version}"
+    implementation "com.github.xiaojieonly.a7zip_XJ:extract:${version}"
+    // implementation "com.github.xiaojieonly.a7zip_XJ:extract-lite:${version}"
 }
 ```
 
