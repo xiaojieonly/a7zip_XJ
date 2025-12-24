@@ -28,6 +28,8 @@ set(P_SEVEN_ZIP_EXTRACT_LITE_SOURCES
         p7zip/CPP/7zip/Archive/Zip/ZipAddCommon.cpp
         # Zip handler update methods (UpdateItems / GetFileTimeType / SetProperties)
         p7zip/CPP/7zip/Archive/Zip/ZipHandlerOut.cpp
+        # Zip archive update implementation (Update function used by ZipHandlerOut.cpp)
+        p7zip/CPP/7zip/Archive/Zip/ZipUpdate.cpp
         p7zip/CPP/7zip/Archive/ArchiveExports.cpp
         p7zip/CPP/7zip/Archive/DllExports2.cpp
         p7zip/CPP/7zip/Archive/HandlerCont.cpp
@@ -98,6 +100,7 @@ set(P_SEVEN_ZIP_EXTRACT_LITE_SOURCES
         p7zip/CPP/7zip/Crypto/WzAes.cpp
         p7zip/CPP/7zip/Crypto/ZipCrypto.cpp
         p7zip/CPP/7zip/Crypto/ZipStrong.cpp
+        p7zip/CPP/7zip/IStream.h
         p7zip/CPP/Common/CRC.cpp
         p7zip/CPP/Common/CrcReg.cpp
         p7zip/CPP/Common/IntToString.cpp
